@@ -3,7 +3,8 @@
 #include <string>
 
 namespace mail {
-	struct Credential {
+	class Credential {
+	public:
 		std::string user;
 		std::string password;
 	};
