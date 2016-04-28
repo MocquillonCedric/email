@@ -3,6 +3,12 @@
 #include <memory>
 #include <string>
 
+#ifdef MailLib_EXPORTS
+#define EXPORT_MAIL_LIB __declspec( dllexport )
+#else 
+#define EXPORT_MAIL_LIB __declspec(dllimport)
+#endif
+
 namespace mail {
 	
 	class Message;
@@ -11,16 +17,10 @@ namespace mail {
 	/**
 	 * Allows applications to send e-mail by using the Simple Mail Transfer Protocol (SMTP).
 	 */
-	class SmtpClient {
+	class EXPORT_MAIL_LIB SmtpClient {
 	public:
 
-/*		SmtpClient(boost::asio::io_service& io);
-
-		SmtpClient(boost::asio::io_service& io, std::string const& host, uint16_t port = 25);
-
-		connect();
-		connect(std::string const& host, uint16_t port = 25);
-*/		/**
+		/**
 		 * Initializes a new instance of the SmtpClient class that sends e-mail
 		 * by using the specified SMTP server and port.
 		 *
@@ -33,30 +33,10 @@ namespace mail {
 
 		~SmtpClient();
 
-		//client_certificates
-		//credentials
-		//delivery_format
-		//delivery_method
-		//enable_ssl
-		//host
-		//pickup_directory_location
-		//(/) port
-		//service_point <=> socket
-		//target_name
-		//timeout
-		//user_default_credentials
 		Credential const& credentials() const;
 
 		void credentials(Credential const& cred);
 
-//		void connect(std::string const& host = "localhost", uint16_t port = 25);
-
-/*		void helo(std::string const& name = "");
-
-		void ehlo(std::string const& name = "");
-
-		void ehlo_or_helo_if_needed();
-*/
 		/**
 		 * Gets the port used for SMTP transactions.
 		 *
